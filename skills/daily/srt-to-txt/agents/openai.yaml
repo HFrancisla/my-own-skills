@@ -1,0 +1,5 @@
+interface:
+  display_name: "SRT to TXT"
+  short_description: "Convert SRT subtitles into clean, readable text"
+policy:
+  allow_implicit_invocation: false
