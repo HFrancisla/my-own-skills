@@ -1,6 +1,6 @@
 # Agent Runtime 分析画像
 
-Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension 和 Skill 同时命中。只对存在实现证据的主题成文。
+Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension 和 Skill 同时命中。选中后以 `agent/` 为唯一产物根，只对存在实现证据的主题成文；`agent/README.md` 汇总 Runtime 入口、核心状态、内部专题和对外接缝。
 
 ## Runtime Loop
 
@@ -65,6 +65,8 @@ Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension �
 - 流式事件、中间状态和终态如何返回调用方。
 - Run/Session/Transcript 如何借助后端持久化。
 - 后台执行、恢复、取消、限流和计费如何跨越接缝。
+
+该接缝的端到端文档写入 `flows/`；Agent 内部实现保留在 `agent/`，API、身份与持久化的 Backend 内部实现保留在 `backend/`。
 
 ## 成文标准
 

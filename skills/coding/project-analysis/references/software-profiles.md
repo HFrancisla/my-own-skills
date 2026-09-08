@@ -2,6 +2,8 @@
 
 一个仓库可同时命中多个画像。只有触发证据存在时才选中主题；目录或项目名称只是线索，入口、依赖、配置、契约、测试或运行行为才是证据。
 
+选中的 Backend、Frontend、CLI、Desktop、Library/SDK、Extension/Plugin 和 Infrastructure 分别以 `backend/`、`frontend/`、`cli/`、`desktop/`、`library/`、`extension/` 和 `infrastructure/` 为产物根。每个域的内部架构、机制和域内质量分析均留在本域；跨域关系遵循 [artifacts-and-evidence.md](artifacts-and-evidence.md) 的 Flow/Quality 归属规则。
+
 ## Backend
 
 **触发**：HTTP/RPC 路由、消息消费者、定时任务、服务入口、数据库或服务端身份认证。
@@ -30,6 +32,8 @@
 **触发**：Backend 和 Frontend 同时存在，并通过 API、BFF、生成客户端、WebSocket/SSE 或共享 Schema 协作。
 
 **覆盖**：前后端契约的权威来源、版本兼容、身份传递、错误映射、实时事件、本地开发拓扑和一条跨端链路。
+
+**产物**：写入 `flows/`，分别链接 `frontend/` 与 `backend/` 的内部实现；不创建独立 `fullstack/` 目录。
 
 ## CLI
 

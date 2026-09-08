@@ -10,7 +10,7 @@
 
 ### 能力域并行
 
-当存在两个以上可独立验证的 System 或能力域时，由主 Agent 完成勘探，然后按 Backend、Frontend、Agent Runtime、Skill/Extension、Infrastructure/Quality 等知识簇派发。这是大型项目的默认形态。
+当存在两个以上可独立验证的 System 或能力域时，由主 Agent 完成勘探，然后按 Backend、Frontend、Agent Runtime、Deep Learning、Skill/Extension、Infrastructure/Quality 等知识簇派发。这是大型项目的默认形态。
 
 ### 二级调研
 
@@ -25,6 +25,7 @@
 - 划分不重叠的知识边界与写入路径。
 - 整合跨域链路、项目总览、全局取舍和风险。
 - 对子 Agent 结论做冲突检查和重要证据抽查。
+- 独占根级总览、`flows/` 和跨域 `quality/` 的最终写入；从能力负责人证据中整合接缝，不复制域内分析。
 
 ### 能力负责人 / Capability Lead
 
@@ -32,6 +33,7 @@
 - 拥有一个知识簇的最终文档，并统一其中的术语和调用链。
 - 更新证据账本，显式记录跨域依赖、冲突和未知项。
 - 只在本域内存在足够独立的调研分支时派生二级 Agent。
+- 独占 manifest 指定的能力域目录，并负责该域 README；域内质量问题留在本域，跨域发现作为证据包交给主 Agent。
 
 ### 调研 Agent / Investigator
 
@@ -73,6 +75,8 @@ completion:
 ```
 
 对 Backend 内的 Agent 功能，将 Backend 与 Agent Runtime 分配给不同能力负责人；跨域契约由主 Agent 整合。Agent Runtime 负责人可为 Context/Memory、Tools/Sandbox、Loop/Scheduling 等局部机制派生调研 Agent，但保留 Agent 专题文档的统一所有权。
+
+深度学习范围较大时，可按“设计与网络实现”和“数据与训练 recipe”拆成调研任务，但由同一 Deep Learning 能力负责人校验模型变体、数据集、配置和指标的一一对应关系，并统一成文。原始源码快照只能有一个写入负责人。
 
 ## 证据包
 
