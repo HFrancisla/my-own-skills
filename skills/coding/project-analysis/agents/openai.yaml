@@ -1,5 +1,5 @@
 interface:
   display_name: "Project-analysis"
-  short_description: "Evidence-driven analysis of existing codebases"
+  short_description: "Static, evidence-driven analysis of existing codebases"
 policy:
   allow_implicit_invocation: false

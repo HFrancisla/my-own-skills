@@ -1,12 +1,14 @@
 # Agent Runtime 分析画像
 
-Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension 和 Skill 同时命中。选中后以 `agent/` 为唯一产物根，只对存在实现证据的主题成文；`agent/README.md` 汇总 Runtime 入口、核心状态、内部专题和对外接缝。
+Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension、Skill 和 Library/SDK 同时命中。命中后以 `agent/` 为主归属根；对外接缝按根级产物规范写入 `flows/`，不在 Agent 和宿主域复制同一事实。`agent/README.md` 汇总 Runtime 入口、核心状态、内部专题和接缝链接。
+
+本画像分析源码、配置、测试和仓库已有的运行轨迹。运行轨迹用于解释已有行为；本 Skill 不主动运行 Agent、调用模型或调用工具。
 
 ## Runtime Loop
 
 **触发**：存在模型请求、消息状态和工具结果之间的迭代控制。
 
-**必答**：任务如何创建和进入循环；模型响应如何解析；工具调用如何回灌；终态、取消、轮次上限、无进展和错误如何判定；同步、流式或后台运行是否共享核心状态机。
+**必答**：任务如何创建和进入循环；模型响应如何解析；工具调用如何回灌；终态、取消、轮次上限、无进展和错误如何判定；同步、流式或后台运行是否共享核心状态机。某类路径不存在时标记 `not-applicable`。
 
 ## Context Assembly
 
@@ -48,7 +50,7 @@ Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension �
 
 **触发**：Trace/Span、结构化事件、Token/成本/延迟指标、轨迹重放、Eval Case、Judge 或基准数据。
 
-**必答**：事件模型和关联 ID；哪些决策可被观测；敏感数据处理；成本归属；评测输入、判定、可重复性和轨迹重放的真实性。
+**必答**：事件模型和关联 ID；哪些决策可被观测；敏感数据处理；成本归属；评测输入、判定、可重复性和轨迹重放的真实性。只有仓库已有评测结果时记录结果，不主动执行评测。
 
 ## Gateway
 
@@ -58,16 +60,14 @@ Agent 是能力画像，可与 Backend、Frontend、CLI、Desktop、Extension �
 
 ## Agent 与 Backend 的接缝
 
-当 Agent 作为后端功能存在时，分别指定 Backend 与 Agent Runtime 的知识负责人，由统一负责人整合：
+当 Agent 作为后端功能存在时，分别分析 Backend 与 Agent Runtime 的内部实现，并由主 Agent 在 `flows/` 整合：
 
-- API/消息如何创建 Agent Run。
-- 身份、租户、权限和请求上下文如何传入 Runtime。
-- 流式事件、中间状态和终态如何返回调用方。
-- Run/Session/Transcript 如何借助后端持久化。
+- API/消息如何创建 Agent Run；
+- 身份、租户、权限和请求上下文如何传入 Runtime；
+- 流式事件、中间状态和终态如何返回调用方；
+- Run/Session/Transcript 如何借助后端持久化；
 - 后台执行、恢复、取消、限流和计费如何跨越接缝。
-
-该接缝的端到端文档写入 `flows/`；Agent 内部实现保留在 `agent/`，API、身份与持久化的 Backend 内部实现保留在 `backend/`。
 
 ## 成文标准
 
-某主题至少拥有独立入口、核心状态/协议、重要边界路径或值得说明的设计取舍之一时，生成独立文档；否则并入 Agent Runtime 总览。同一负责人可为同一知识簇生成多篇文档。
+某主题至少拥有独立入口、核心状态/协议、重要边界路径或值得说明的设计取舍之一时，生成独立文档；否则并入 Agent Runtime 总览。同一负责人可为同一知识簇生成多篇文档，但事实只保留在一个主归属域。
