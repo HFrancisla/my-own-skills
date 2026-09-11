@@ -1,6 +1,6 @@
 # 多 Agent 分析编排
 
-分析按知识边界分工，文档按阅读体验组织。主 Agent 拥有范围、路由、共享账本和跨域结论；子 Agent 只负责独占的域内证据和文档。
+分析按知识边界分工，产物按阅读体验组织。主 Agent 拥有范围、路由、共享证据和跨域结论；子 Agent 只负责独占的域内证据，并在 `artifacts` 模式按任务契约编写域内文档。
 
 ## 选择执行形态
 
@@ -8,9 +8,9 @@
 
 当仓库只有一个主要 System、核心路径高度集中、专题共享同一组类型，且只需少量分册时，由当前 Agent 连续完成。
 
-### 能力域并行
+### 任务并行
 
-当存在两个以上可独立验证的 System 或能力域时，由主 Agent 完成勘探，然后按 Backend、Frontend、Agent Runtime、Deep Learning、Skill/Extension、Infrastructure/Quality 等知识簇派发。并行任务必须拥有互不重叠的最终文档写入路径。
+当存在两个以上可独立验证的 System、能力域或专题时，由主 Agent 完成勘探和覆盖清单，再按知识簇派发，例如 Backend、Frontend、Agent Runtime、Deep Learning、Skill/Extension、Infrastructure/Quality。并行任务必须拥有互不重叠的证据范围；`artifacts` 模式下还必须拥有互不重叠的最终文档写入路径。
 
 ### 二级调研
 
@@ -21,17 +21,17 @@
 ### 主 Agent / Integrator
 
 - 确定分析契约、路径基准和 revision；
-- 建立仓库地图、术语表、manifest 和 evidence ledger；
-- 划分不重叠的知识边界与写入路径；
-- 独占 `_work/`、根级总览、`flows/`、跨域 `quality/` 和最终证据索引；
+- 建立仓库地图、术语表、manifest/evidence ledger 或 inline 等价工作状态；
+- 划分不重叠的知识边界；为 Capability Lead 预分配唯一 evidence ID 命名空间，`artifacts` 模式同时分配唯一写入路径；
+- `artifacts` 模式独占 `_work/`、根级总览、`flows/`、跨域 `quality/` 和最终证据索引；`inline` 模式独占对应综合结论；
 - 在所有能力负责人交付后整合跨域链路、项目总览、全局取舍和风险；
 - 回到原始源码核对冲突结论。
 
 ### 能力负责人 / Capability Lead
 
 - 读取共享上下文，然后验证负责范围内的源码、配置和已有产物；
-- 拥有一个知识簇的最终文档，并统一其中的术语和调用链；
-- 返回结构化证据包，或只写入 manifest 指定的能力域目录；
+- 拥有一个知识簇的结论并统一其中的术语和调用链；`artifacts` 模式按任务契约拥有对应最终文档；
+- 始终返回结构化证据包；任务契约分配了最终文档时，同时只写入指定的能力域路径；
 - 显式记录跨域依赖、冲突、未知项和 `not-applicable`；
 - 将跨域发现交给主 Agent，不直接写入 `flows/`、`quality/` 或共享账本。
 
@@ -43,7 +43,7 @@
 
 ## 共享上下文
 
-主 Agent 在派发前创建并维护：
+主 Agent 在派发前创建并维护共享上下文。`artifacts` 模式使用以下文件；`inline` 模式将同等内容作为只读快照放入任务契约，不创建 `_work/`：
 
 ```text
 <output>/_work/
@@ -61,6 +61,7 @@
 
 ```yaml
 task: <能力域或局部机制>
+role: capability-lead|investigator
 revision: <git revision or non-git fingerprint>
 scope:
   include: [<目录/包/入口>]
@@ -68,14 +69,17 @@ scope:
 questions: [<必须回答的机制问题>]
 depends_on: [<task-id>]
 shared_context: [<repository-map>, <terminology>, <evidence-ledger>]
-outputs: [<独占写入路径>]
+evidence_ids: <Capability Lead 的全局 ID 命名空间；Investigator 使用 local>
+outputs: [<artifacts 模式下 Capability Lead 的独占路径；inline 或 Investigator 使用 []>]
 completion:
   - <正常路径已有证据>
   - <相关边界路径已有证据或 not-applicable>
+  - <负责的画像必答项已有结论和证据>
+  - <结构化证据包已返回>
   - <未知项已记录>
 ```
 
-对 Backend 内的 Agent 功能，将 Backend 与 Agent Runtime 分配给不同能力负责人；跨域契约由主 Agent 写入 `flows/`。Agent Runtime 负责人可为 Context/Memory、Tools/Sandbox、Loop/Scheduling 等局部机制派生调研 Agent，但保留 Agent 专题文档的统一所有权。
+对 Backend 内的 Agent 功能，将 Backend 与 Agent Runtime 分配给不同能力负责人；跨域契约由主 Agent 统一整合，`artifacts` 模式写入 `flows/`。Agent Runtime 负责人先拥有最低能力覆盖表和横切控制矩阵，再按 Instruction/Context、Loop/Translation/Provider、Tools/Governance、State/Memory、Reliability/Observability、Subagents/Scheduling 等证据簇派生调研 Agent，并保留 Agent 结论的统一所有权。每个调研任务明确负责的最低能力项，汇总后不得出现无人覆盖项。
 
 深度学习范围较大时，可按“设计与网络实现”和“训练配置与复现说明”拆成调研任务。后者只分析仓库已有代码、配置、日志和文档，返回供人执行的流程说明；不下载资源、不安装依赖、不运行训练。模型源码引用或用户明确要求的源码快照只能有一个写入负责人。
 
@@ -90,7 +94,7 @@ entrypoints:
     symbol: <symbol>
 core_types: [<type>]
 findings:
-  - id: <local-id>
+  - id: <Capability Lead 使用预分配全局 ID；Investigator 使用 local-id>
     status: verified|documented|inferred|unknown|not-applicable
     kind: source|config|test|existing-log|document
     claim: <fact or documented claim>
@@ -103,12 +107,13 @@ unknowns: [<unresolved question>]
 suggested_artifacts: [<optional output split>]
 ```
 
-主 Agent 将确认后的 findings 转换为全局 evidence ledger ID。局部 ID 不直接出现在最终索引中。
+Capability Lead 使用任务契约预分配的全局 evidence ID，并在证据包和最终文档中保持一致。Investigator 使用局部 ID，由直接上级核验并在成文前映射到对应 Lead 的全局命名空间；主 Agent 最终检查 ID 唯一性并合并 evidence ledger。
 
 ## 并发与整合门
 
-- 只并行执行最终写入路径不重叠、证据范围可独立验证的任务；
+- 只并行执行证据范围可独立验证的任务；`artifacts` 模式还要求最终写入路径不重叠；
 - 需要共享类型、契约或上游结论的任务在依赖完成后执行；
+- Capability Lead 和 Investigator 都必须返回证据包；前者使用预分配的全局 evidence ID 并只写任务契约分配的最终文档，后者使用局部 ID且不写最终文档；
 - 子 Agent 不写 `_work/`、根级总览、`flows/`、跨域 `quality/` 或 `99-证据索引.md`；
 - 主 Agent 在能力负责人交付后统一合并证据、编写跨域文档和最终总览；
 - 冲突结论回到原始证据处解决，无法确认时标记 `unknown`。

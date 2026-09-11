@@ -1,8 +1,8 @@
 # 软件项目能力画像
 
-一个仓库可同时命中多个画像。目录或项目名称只是线索；入口、依赖、配置、契约、测试或已有运行产物才是触发证据。没有匹配画像时使用公共基线，并在 manifest 中记录 `unprofiled` 或范围外原因。
+一个仓库可同时命中多个画像。目录或项目名称只是线索；入口、依赖、配置、契约、测试或已有运行产物才是触发证据。没有匹配画像时使用公共基线，并在 manifest 或等价计划中记录 `unprofiled` 或范围外原因。
 
-选中的 Backend、Frontend、CLI、Desktop、Library/SDK、Extension/Plugin 和 Infrastructure 分别以 `backend/`、`frontend/`、`cli/`、`desktop/`、`library/`、`extension/` 和 `infrastructure/` 为产物根。域内事实只在主归属域定义，跨域关系写入 `flows/`，全局治理写入 `quality/`。
+选中的 Backend、Frontend、CLI、Desktop、Library/SDK、Extension/Plugin 和 Infrastructure 分别以 `backend/`、`frontend/`、`cli/`、`desktop/`、`library/`、`extension/` 和 `infrastructure/` 为产物根。域内事实只在主归属域定义，跨域关系写入 `flows/`，全局治理写入 `quality/`。这些路径适用于 `artifacts` 模式；`inline` 模式以同等章节表达归属和接缝，不创建目录。
 
 ## Backend
 
@@ -46,7 +46,7 @@
 
 **触发**：Manifest、Host SDK、激活钩子、贡献点、插件发现或动态加载。
 
-**覆盖**：宿主契约、发现/激活/停用/卸载生命周期、能力声明、隔离与权限、版本兼容、扩展间冲突和调试发布。Skill 若有独立指令契约，同时加载 Skill 画像；同一实现的主归属由 manifest 指定。
+**覆盖**：宿主契约、发现/激活/停用/卸载生命周期、能力声明、隔离与权限、版本兼容、扩展间冲突和调试发布。Skill 若有独立指令契约，同时加载 Skill 画像；同一实现的主归属由 manifest 或等价计划指定。
 
 ## Infrastructure
 

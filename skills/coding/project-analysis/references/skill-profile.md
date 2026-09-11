@@ -1,6 +1,6 @@
 # Agent Skill 分析画像
 
-Skill 可以是单一目录、技能集合，或宿主项目内的一种扩展。命中后以 `skills/` 为主归属根；若同时是 Extension，manifest 指定主归属，另一域只引用接缝。首先确定分析单元和宿主契约，再分析具体 Skill。`skills/README.md` 负责集合目录、形态分簇、宿主关系和单项分析链接。
+Skill 可以是单一目录、技能集合，或宿主项目内的一种扩展。命中后以 `skills/` 为主归属根；若同时是 Extension，manifest 或等价计划指定主归属，另一域只引用接缝。首先确定分析单元和宿主契约，再分析具体 Skill。`artifacts` 模式由 `skills/README.md` 负责集合目录、形态分簇、宿主关系和单项分析链接；`inline` 模式给出等价章节。
 
 ## 集合级分析
 
@@ -8,7 +8,7 @@ Skill 可以是单一目录、技能集合，或宿主项目内的一种扩展�
 
 1. 盘点每个 Skill 的 name、description、调用策略、资源和外部依赖；
 2. 根据问题域和实现形态分簇，识别共享参考、脚本、重复流程和路由冲突；
-3. `survey` 建立目录和代表性样本；`standard` 覆盖所有 Skill 的契约并深入关键样本；`deep` 覆盖 manifest 纳入范围的全部 Skill；
+3. `survey` 建立目录或等价清单并选择代表性样本；`standard` 覆盖所有 Skill 的契约并深入关键样本；`deep` 覆盖 manifest 或等价计划纳入范围的全部 Skill；
 4. 样本选择记录理由，不把样本结论扩展到未读取的 Skill。
 
 ## 单个 Skill 必答主题
