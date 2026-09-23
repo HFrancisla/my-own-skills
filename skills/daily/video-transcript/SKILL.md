@@ -1,6 +1,6 @@
 ---
-name: subtitle-to-transcript
-description: 将字幕整理为轻度校对、语义分段的可读文字稿。
+name: video-transcript
+description: 将本地 SRT 或视频字幕整理为轻度校对、语义分段的 Markdown 文字稿。
 disable-model-invocation: true
 ---
 
