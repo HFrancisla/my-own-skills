@@ -1,0 +1,9 @@
+# Netscape HTTP Cookie File
+# TEMPLATE ONLY. This is not a working login cookie.
+# Export a site-specific cookie jar and save it as one of:
+#   bilibili.cookies.txt
+#   youtube.cookies.txt
+# Netscape rows have seven tab-separated fields:
+# domain, include_subdomains, path, secure, expires_unix, name, value
+# Example only; do not fill with guessed values:
+# .example.invalid	TRUE	/	TRUE	0	sessionid	EXAMPLE_ONLY

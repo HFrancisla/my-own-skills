@@ -1,0 +1,5 @@
+interface:
+  display_name: "Subtitle to Transcript"
+  short_description: "将字幕整理为轻度校对、分段清晰的 Markdown 稿"
+policy:
+  allow_implicit_invocation: false
