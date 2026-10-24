@@ -1,0 +1,15 @@
+# 凭据与敏感文件（确保各 Skill 的本地凭据不被误提交）
+*.cookies.txt
+cookies.txt
+**/auth/*.cookies.txt
+**/auth/cookies.txt
+
+# Python 缓存与临时文件
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 系统文件与临时日志
+.DS_Store
+Thumbs.db
+*.log

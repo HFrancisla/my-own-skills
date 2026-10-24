@@ -1,6 +1,6 @@
 ---
 name: project-analysis
-description: 对现有代码仓库进行证据驱动的静态系统分析，并将范围、路由、专题和证据产物写入分析目录；适用于接手项目、源码架构拆解、核心机制学习、代码级复现说明或指定机制深度剖析。
+description: 对现有代码仓库进行证据驱动的静态系统分析，生成结构化架构与机制产物。
 disable-model-invocation: true
 ---
 
@@ -28,7 +28,7 @@ disable-model-invocation: true
 - [references/routing-and-baseline.md](references/routing-and-baseline.md)：仓库层级、分析目标、深度和公共必答问题；
 - [references/artifacts-and-evidence.md](references/artifacts-and-evidence.md)：产物归属、Manifest、证据状态和验收规范。
 
-随后在写入 output 前读取并记录所有适用于 target 和 output 的仓库指令，并固定源码基线：Git 仓库记录 commit、原始工作树状态和排除 output 后的 diff hash；该 hash 覆盖 staged/unstaged diff 以及未跟踪源文件的路径与内容摘要。非 Git 仓库对目标内容生成排除 output 的内容指纹。后续证据都引用这一本次分析基线，避免 Skill 自己生成的文件污染 revision 或 dirty 状态。
+随后在写入 output 前读取并记录所有适用于 target 和 output 的仓库指令，并按规范固定排除 output 后的源码基线（commit、工作树状态、diff hash 或内容指纹）。后续证据均引用该基线，避免分析产物污染状态。
 
 `artifacts` 模式按产物规范初始化 draft 状态的 `analysis-manifest.yaml`、`00-分析范围与路由.md`、`_work/repository-map.md`、`_work/terminology.md` 和 `_work/evidence-ledger.md`。`inline` 模式在当前工作上下文中维护同等的契约、路由、术语和证据结构，不执行文件存在性验收。
 

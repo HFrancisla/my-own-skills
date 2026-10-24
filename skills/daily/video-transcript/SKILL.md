@@ -22,7 +22,7 @@ disable-model-invocation: true
 
 ### 2. 生成原始稿
 
-使用本 skill 的脚本机械清洗 SRT：
+使用本 skill 的脚本机械清洗 SRT（`<skill目录>` 为本 `SKILL.md` 所在绝对路径）：
 
 ```bash
 python "<skill目录>/scripts/srt_to_txt.py" "<输入.srt>" -o "<输出目录>/[Raw]xxxx.txt"
