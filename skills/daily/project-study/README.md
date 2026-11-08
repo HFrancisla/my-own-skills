@@ -1,0 +1,51 @@
+# Project Study
+
+一个用于**学习已有真实代码项目**的 Agent Skill。通过源码侦察、双地图（代码架构/知识依赖）、学习路线、单元精读、复盘和状态恢复，帮助学习者建立能独立解释与验证的项目理解。
+
+本 Skill 仅在用户显式指定时调用：`SKILL.md` 配置 `disable-model-invocation: true`，`agents/openai.yaml` 配置 `policy.allow_implicit_invocation: false`，与 `video-transcript` 的调用策略一致。
+
+## 第一版支持
+
+- 学习本地项目或用户已选择的 GitHub 仓库。
+- 分析入口、模块边界、核心调用链、数据与状态流、重要设计取舍。
+- 按学习目标规划 30–90 分钟的学习单元；每次只推进一个。
+- 在关键节点让学习者预测、解释、验证；不能把“读过”视为“掌握”。
+- 在用户同意的目录保存学习记录，下次继续时按需恢复，不重复全仓扫描。
+
+不负责自动开发新功能、批量发现项目、默默运行仓库脚本或修改业务源码。
+
+## 用法示例
+
+首次开始：
+
+    用 project-study 学习当前项目。
+    我想先理解项目架构和 HTTP 请求的主要处理链路，
+    请先建立代码地图和知识地图，并推荐 U01。
+
+深入当前单元：
+
+    继续学习 U02，带我从 API 入口追踪到数据库写入。
+    希望我先预测调用方向，再看真实代码证据。
+
+第二天继续或验收：
+
+    继续昨天的项目学习，今天该看哪条调用链？
+    我完成 U02 了，检查我是否能够独立解释这个模块。
+
+## Skill 文件结构
+
+    project-study/
+      SKILL.md
+      README.md
+      agents/
+        openai.yaml
+      references/
+        learning-workflow.md
+        code-analysis.md
+        artifact-templates.md
+
+SKILL.md 定义触发条件、流程和安全规则，references/ 仅在对应阶段按需读取。第一版不依赖数据库和脚本。
+
+## 学习状态
+
+默认建议目标项目根目录下的 .project-learning/，**首次写入前询问用户**。也可选项目外的目录。记录项目总览、路线、进度、每天的学习会话和少量高价值笔记。Skill 本身不存储可变学习状态。
