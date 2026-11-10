@@ -1,5 +1,5 @@
 interface:
   display_name: "Project Study"
-  short_description: "首次规划完整项目学习路线，之后按路线源码带读和续学"
+  short_description: "先建立项目地图与学习方向，再按模块渐进式源码带读和续学"
 policy:
   allow_implicit_invocation: false
