@@ -1,5 +1,5 @@
 interface:
   display_name: "Project Study"
-  short_description: "系统学习已有代码项目：架构分析、源码精读与复盘"
+  short_description: "首次规划完整项目学习路线，之后按路线源码带读和续学"
 policy:
   allow_implicit_invocation: false
