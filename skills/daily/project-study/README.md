@@ -9,7 +9,7 @@
 - 「用 project-study 从上次实际讲到的位置继续。」
 - 「用 project-study 解释这条调用链，不创建课程。」
 
-## 产物（需用户授权写入）
+## 产物
 
 默认在项目的 `.project-learning/` 下保存：
 

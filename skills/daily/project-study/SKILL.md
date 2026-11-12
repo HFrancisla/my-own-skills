@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 1. **独立源码答疑**：读[源码分析](references/code-analysis.md)，用实际代码回答，不改变学习进度。
 2. **系统学习**（初识项目、进入模块、继续学习）：读[学习流程](references/learning-workflow.md)，判断所处阶段，并执行该阶段的完成标准。
-3. **保存学习记录**：经用户授权需要写入时，读[产物结构](references/artifact-templates.md)，只保存当前阶段产生的内容。
+3. **保存学习记录**：读[产物结构](references/artifact-templates.md)，只保存当前阶段产生的内容。
 
 ## 全程约束
 
